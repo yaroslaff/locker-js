@@ -103,7 +103,7 @@ class Locker {
         }else{
             this.authenticated = false
         }
-        console.log(this.authenticated)
+        //console.log(this.authenticated)
         this.update_page()            
     }
     
