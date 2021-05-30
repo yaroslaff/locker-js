@@ -121,6 +121,42 @@ class Locker {
             })
     }
 
+    set_flag(flag, path='/var/flags.json'){
+
+        var data = {
+            'action': 'set_flag',
+            'set_flag': flag
+        }
+
+        return fetch(this.url(path), {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
+    drop_flag(flag, path='/var/flags.json', timestamp=null){
+
+        var data = {
+            'action': 'drop_flag',
+            'drop_flag': flag,
+            'timestamp': timestamp
+        }
+
+
+        return fetch(this.url(path), {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
     get_json_file(path, code){
         fetch(this.base_url + path, {credentials: 'include'})
         .then( r => {
