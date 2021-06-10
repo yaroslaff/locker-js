@@ -123,21 +123,27 @@ class Locker {
             })
     }
 
+    /* low-level method to send POST requests */
+    post(path, data){
+        return fetch(this.base_url + path, 
+            {
+                credentials: 'include', 
+                method: 'POST', 
+                body: data,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+                })
+    }
+
     set_flag(flag, path='/var/flags.json'){
 
         var data = {
             'action': 'set_flag',
             'set_flag': flag
         }
-
-        return fetch(this.url(path), {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+        return this.post(path, data)
     }
 
     drop_flag(flag, path='/var/flags.json', timestamp=null){
@@ -148,15 +154,7 @@ class Locker {
             'timestamp': timestamp
         }
 
-
-        return fetch(this.url(path), {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+        return this.post(path, data)
     }
 
     get_json_file(path, code){
