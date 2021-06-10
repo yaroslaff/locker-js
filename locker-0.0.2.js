@@ -125,7 +125,7 @@ class Locker {
 
     /* low-level method to send POST requests */
     post(path, data){
-        return fetch(this.base_url + path, 
+        return fetch(this.url(path), 
             {
                 credentials: 'include', 
                 method: 'POST', 
