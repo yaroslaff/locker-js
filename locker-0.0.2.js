@@ -129,10 +129,10 @@ class Locker {
             {
                 credentials: 'include', 
                 method: 'POST', 
-                body: data,
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                body: JSON.stringify(data)
             })
     }
 
