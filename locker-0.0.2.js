@@ -133,8 +133,7 @@ class Locker {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
-                })
+            })
     }
 
     set_flag(flag, path='/var/flags.json'){
