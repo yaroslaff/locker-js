@@ -90,7 +90,6 @@ class Locker {
         return fetch(this.base_url + 'authenticated', {credentials: 'include'})
         .then(r => r.json())
         .then(data => {
-            console.log("data:", data)
             for(let msg of data.messages){
                 console.log(msg)
             }
