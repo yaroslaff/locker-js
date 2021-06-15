@@ -88,8 +88,8 @@ class Locker {
 
     async check_authenticated(){
         return fetch(this.base_url + 'authenticated', {credentials: 'include'})
-        .then( r => {
-            let data = await r.json() 
+        .then(r => r.json)
+        .then(data => {
             console.log("data:", data)
             for(let msg of data.messages){
                 console.log(msg)
