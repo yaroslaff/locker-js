@@ -128,19 +128,17 @@ class Locker {
                 messages: ['Reuse cached value from localStorage'],
                 status: true
             }
-            this.update_page()
+            this.authenticated = true
         }else{
             /* temporary set null to draw progress */
             this.set_authenticated(null)
             login_status = await this.check_authenticated()
             this.set_authenticated(login_status.status)
         }
+        this.update_page()
 
         if(this.hook_after_check_login){
             this.hook_after_check_login(login_status)
-        }else{
-            //console.log(this.authenticated)
-            this.update_page()
         }
 
         return login_status
