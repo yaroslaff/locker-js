@@ -63,8 +63,13 @@ Uploads data from application to user file on locker server:
   })
 ~~~
 
-#### set_flag(flag, path)
+#### set_flag(flag, path='/var/flags.json')
 Sets flag *name* in flag file *path*.
+~~~js
+locker.set_flag('myflag')
+~~~
+
+Each flag automatically includes userid and timestamp which are added on server.
 
 #### drop_flag(flag, path, timestamp=null)
 Drop flag *name* in flag file *path*. If timestamp is specified, flag is dropped only if it's older then timestamp.
