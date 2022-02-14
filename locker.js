@@ -41,7 +41,7 @@ class Locker {
     }
 
     get_socketio_url(){
-        sio_url = new URL(this.base_url)
+        var sio_url = new URL(this.base_url)
         sio_url.protocol = 'http'
         sio_url.port = 8899
 
