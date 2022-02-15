@@ -7,7 +7,7 @@ class Locker {
         this.authenticated = false
         this.authenticated_cachetime = 60
 
-        this.pubconf = null
+        this.preload = {}
 
         /* App may override this */
         /* ... options */
@@ -43,13 +43,26 @@ class Locker {
     }
 
     get_pubconf(){
-        if(!this.pubconf){
-            fetch(this.url('/pubconf'))
-            .then( r => r.json() )
-            .then(pubconf => this.pubconf = pubconf)
-        }
+        return this.get('/pubconf')
+            .then( r => r.json() )     
+            .then( pubconf => this.pubconf = pubconf)       
+    }
+    
 
-        return this.pubconf
+    preload_json_file(file){
+        return this.get(file)
+            .then( r => r.json() )     
+            .then( data => this.preload[file] = data)       
+    }
+
+    preload_json_files(elements=null){
+        if(elements==null){
+            console.log("use default elements")
+            elements = ['/pubconf', '~/r/userinfo.json']
+        }
+        let promises = []
+        elements.forEach( e => promises.push(this.preload_json_file(e)))
+        return Promise.all(promises)
     }
 
     update_page(){
@@ -158,11 +171,11 @@ class Locker {
     
 
     get(path){
-        return fetch(this.base_url + path, {credentials: 'include'})
+        return fetch(this.url(path), {credentials: 'include'})
     }
 
     put(path, data){
-        return fetch(this.base_url + path, 
+        return fetch(this.url(path), 
             {
                 credentials: 'include', 
                 method: 'PUT', 
