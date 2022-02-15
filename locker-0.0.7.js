@@ -7,6 +7,8 @@ class Locker {
         this.authenticated = false
         this.authenticated_cachetime = 60
 
+        this.pubconf = null
+
         /* App may override this */
         /* ... options */
         this.return_url = window.location
