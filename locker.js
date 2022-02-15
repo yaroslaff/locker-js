@@ -42,12 +42,14 @@ class Locker {
         return url.href
     }
 
-    get_socketio_url(){
-        var sio_url = new URL(this.base_url)
-        sio_url.protocol = 'http'
-        sio_url.port = 8899
+    get_pubconf(){
+        if(!this.pubconf){
+            fetch(this.url('/pubconf'))
+            .then( r => r.json() )
+            .then(pubconf => this.pubconf = pubconf)
+        }
 
-        return sio_url.href
+        return this.pubconf
     }
 
     update_page(){
